@@ -1,0 +1,4 @@
+project_id = "tlpvtjwyszjqddguhncv"
+
+[functions.farmer-chat]
+verify_jwt = false
