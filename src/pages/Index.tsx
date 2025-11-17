@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { InputSidebar } from "@/components/InputSidebar";
 import { YieldCard } from "@/components/YieldCard";
 import { WeatherAnalysisCard } from "@/components/WeatherAnalysisCard";
@@ -6,8 +7,11 @@ import { RiskAssessmentCard } from "@/components/RiskAssessmentCard";
 import { RecommendationsCard } from "@/components/RecommendationsCard";
 import { predictYield } from "@/utils/predictionEngine";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { MessageSquare } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     district: "",
     season: "",
@@ -49,6 +53,14 @@ const Index = () => {
           <p className="text-muted-foreground">
             Climate-Based Analysis & Forecasting System
           </p>
+          <Button
+            onClick={() => navigate("/chatbot")}
+            className="mt-4"
+            variant="outline"
+          >
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Ask Farming Advisor
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[calc(100vh-200px)]">
