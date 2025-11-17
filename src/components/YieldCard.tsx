@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface YieldCardProps {
   yield: number;
@@ -7,12 +8,13 @@ interface YieldCardProps {
 }
 
 export const YieldCard = ({ yield: yieldValue, maxYield = 6500 }: YieldCardProps) => {
+  const { t } = useLanguage();
   const yieldPercentage = (yieldValue / maxYield) * 100;
 
   return (
     <Card className="bg-gradient-to-br from-success/10 to-success/5 border-success/20">
       <CardHeader>
-        <CardTitle className="text-lg">Predicted Rice Yield</CardTitle>
+        <CardTitle className="text-lg">{t("predictedYield")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="text-center">
@@ -24,7 +26,7 @@ export const YieldCard = ({ yield: yieldValue, maxYield = 6500 }: YieldCardProps
         
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Yield Potential</span>
+            <span className="text-muted-foreground">{t("yieldPotential")}</span>
             <span className="font-medium">{yieldPercentage.toFixed(1)}%</span>
           </div>
           <Progress value={yieldPercentage} className="h-3" />

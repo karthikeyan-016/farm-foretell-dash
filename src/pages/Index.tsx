@@ -9,9 +9,12 @@ import { predictYield } from "@/utils/predictionEngine";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MessageSquare } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 const Index = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     district: "",
     season: "",
@@ -47,11 +50,14 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
       <div className="container mx-auto p-6">
         <div className="mb-8 text-center">
+          <div className="flex justify-center mb-4">
+            <LanguageToggle />
+          </div>
           <h1 className="text-4xl font-bold text-foreground mb-2">
-            🌾 Tamil Nadu Rice Yield Prediction
+            🌾 {t("appTitle")}
           </h1>
           <p className="text-muted-foreground">
-            Climate-Based Analysis & Forecasting System
+            {t("appSubtitle")}
           </p>
           <Button
             onClick={() => navigate("/chatbot")}
@@ -59,7 +65,7 @@ const Index = () => {
             variant="outline"
           >
             <MessageSquare className="mr-2 h-4 w-4" />
-            Ask Farming Advisor
+            {t("askAdvisor")}
           </Button>
         </div>
 
@@ -78,10 +84,9 @@ const Index = () => {
               <Card className="h-full flex items-center justify-center p-12 bg-card/50 backdrop-blur-sm border-dashed">
                 <div className="text-center space-y-4">
                   <div className="text-6xl mb-4">🌾</div>
-                  <h2 className="text-2xl font-bold text-foreground">Ready to Predict</h2>
+                  <h2 className="text-2xl font-bold text-foreground">{t("readyToPredict")}</h2>
                   <p className="text-muted-foreground max-w-md">
-                    Select district, season and climate inputs to get AI-powered forecasts
-                    for rice yield and farming recommendations.
+                    {t("readyDescription")}
                   </p>
                 </div>
               </Card>

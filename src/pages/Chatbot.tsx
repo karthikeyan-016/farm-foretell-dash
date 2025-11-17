@@ -6,6 +6,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Send, ArrowLeft, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageToggle } from "@/components/LanguageToggle";
 
 interface Message {
   role: "user" | "assistant";
@@ -13,10 +15,11 @@ interface Message {
 }
 
 const Chatbot = () => {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "🌾 Vanakkam! I'm your farming advisor. Ask me anything about rice cultivation, climate management, pest control, or government schemes for Tamil Nadu farmers."
+      content: t("chatWelcome")
     }
   ]);
   const [input, setInput] = useState("");
@@ -84,14 +87,15 @@ const Chatbot = () => {
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <div>
+          <div className="flex-1">
             <h1 className="text-3xl font-bold text-foreground">
-              🌾 Farmer Advisory Chatbot
+              🌾 {t("chatbotTitle")}
             </h1>
             <p className="text-muted-foreground">
-              Get expert advice on rice farming in Tamil Nadu
+              {t("chatbotSubtitle")}
             </p>
           </div>
+          <LanguageToggle />
         </div>
 
         <Card className="h-[calc(100vh-200px)] flex flex-col bg-card/50 backdrop-blur-sm">
@@ -128,7 +132,7 @@ const Chatbot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask about farming practices, weather, pests, schemes..."
+                placeholder={t("chatPlaceholder")}
                 disabled={isLoading}
                 className="flex-1"
               />

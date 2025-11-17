@@ -1,14 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface RecommendationsProps {
   recommendations: string[];
 }
 
 export const RecommendationsCard = ({ recommendations }: RecommendationsProps) => {
+  const { t } = useLanguage();
+  
   return (
     <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
       <CardHeader>
-        <CardTitle className="text-lg">Recommendations</CardTitle>
+        <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-3">

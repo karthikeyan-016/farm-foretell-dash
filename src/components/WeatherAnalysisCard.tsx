@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface WeatherFactor {
   label: string;
@@ -19,6 +20,8 @@ interface WeatherAnalysisProps {
 }
 
 export const WeatherAnalysisCard = ({ suitabilityScore, factors, observations }: WeatherAnalysisProps) => {
+  const { t } = useLanguage();
+  
   const getScoreColor = (score: number) => {
     if (score >= 75) return "text-success";
     if (score >= 50) return "text-warning";
@@ -34,12 +37,12 @@ export const WeatherAnalysisCard = ({ suitabilityScore, factors, observations }:
   return (
     <Card className="bg-card/50 backdrop-blur-sm">
       <CardHeader>
-        <CardTitle className="text-lg">Weather Condition Analysis</CardTitle>
+        <CardTitle className="text-lg">{t("weatherAnalysis")}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium">Suitability Score</span>
+            <span className="text-sm font-medium">{t("suitabilityScore")}</span>
             <span className={`text-2xl font-bold ${getScoreColor(suitabilityScore)}`}>
               {suitabilityScore}%
             </span>
@@ -51,12 +54,12 @@ export const WeatherAnalysisCard = ({ suitabilityScore, factors, observations }:
           {Object.entries(factors).map(([key, factor]) => (
             <div key={key} className="p-3 rounded-lg bg-muted/50 space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium capitalize">{key}</span>
+                <span className="text-xs font-medium capitalize">{t(`${key}Factor`)}</span>
                 <Badge 
                   variant={factor.score >= 75 ? "default" : factor.score >= 50 ? "secondary" : "destructive"}
                   className="text-xs"
                 >
-                  {factor.label}
+                  {t(factor.label.toLowerCase())}
                 </Badge>
               </div>
               <div className="text-sm font-semibold">{factor.score}%</div>
@@ -67,7 +70,7 @@ export const WeatherAnalysisCard = ({ suitabilityScore, factors, observations }:
 
         {observations.length > 0 && (
           <div className="space-y-2 pt-2 border-t">
-            <span className="text-sm font-medium">Key Observations</span>
+            <span className="text-sm font-medium">{t("observations")}</span>
             <ul className="space-y-1">
               {observations.map((obs, idx) => (
                 <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
