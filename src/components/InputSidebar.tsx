@@ -3,6 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface InputSidebarProps {
   formData: {
@@ -36,20 +37,21 @@ const DISTRICTS = [
 const SEASONS = ["Kuruvai", "Samba", "Thaladi", "Navarai"];
 
 export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: InputSidebarProps) => {
+  const { t } = useLanguage();
+  
   return (
     <Card className="h-full overflow-y-auto p-6 bg-card/50 backdrop-blur-sm border-border/50">
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold text-foreground mb-2">Input Parameters</h2>
-          <p className="text-sm text-muted-foreground">Configure climate and agricultural inputs</p>
+          <h2 className="text-2xl font-bold text-foreground mb-2">{t("inputTitle")}</h2>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="district">District</Label>
-            <Select value={formData.district} onValueChange={(value) => onFormChange('district', value)}>
+            <Label htmlFor="district">{t("district")}</Label>
+            <Select value={formData.district} onValueChange={(value) => onFormChange("district", value)}>
               <SelectTrigger id="district">
-                <SelectValue placeholder="Select district" />
+                <SelectValue placeholder={t("selectDistrict")} />
               </SelectTrigger>
               <SelectContent>
                 {DISTRICTS.map((district) => (
@@ -60,10 +62,10 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="season">Season</Label>
-            <Select value={formData.season} onValueChange={(value) => onFormChange('season', value)}>
+            <Label htmlFor="season">{t("season")}</Label>
+            <Select value={formData.season} onValueChange={(value) => onFormChange("season", value)}>
               <SelectTrigger id="season">
-                <SelectValue placeholder="Select season" />
+                <SelectValue placeholder={t("selectSeason")} />
               </SelectTrigger>
               <SelectContent>
                 {SEASONS.map((season) => (
@@ -74,7 +76,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="year">Year</Label>
+            <Label htmlFor="year">{t("year")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="year"
@@ -90,7 +92,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="avgTemp">Average Temperature (°C)</Label>
+            <Label htmlFor="avgTemp">{t("avgTemp")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="avgTemp"
@@ -107,7 +109,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="minTemp">Min Temp (°C)</Label>
+              <Label htmlFor="minTemp">{t("minTemp")}</Label>
               <div className="flex items-center gap-2">
                 <Slider
                   id="minTemp"
@@ -122,7 +124,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="maxTemp">Max Temp (°C)</Label>
+              <Label htmlFor="maxTemp">{t("maxTemp")}</Label>
               <div className="flex items-center gap-2">
                 <Slider
                   id="maxTemp"
@@ -139,7 +141,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="rainfall">Total Rainfall (mm)</Label>
+            <Label htmlFor="rainfall">{t("rainfall")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="rainfall"
@@ -155,7 +157,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="humidity">Average Humidity (%)</Label>
+            <Label htmlFor="humidity">{t("humidity")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="humidity"
@@ -171,7 +173,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="waterAvailability">Water Availability Index</Label>
+            <Label htmlFor="waterAvailability">{t("waterAvailability")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="waterAvailability"
@@ -187,7 +189,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="fertilizer">Fertilizer NPK (kg/ha)</Label>
+            <Label htmlFor="fertilizer">{t("fertilizer")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="fertilizer"
@@ -203,7 +205,7 @@ export const InputSidebar = ({ formData, onFormChange, onPredict, isLoading }: I
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="soilQuality">Soil Quality Index</Label>
+            <Label htmlFor="soilQuality">{t("soilQuality")}</Label>
             <div className="flex items-center gap-4">
               <Slider
                 id="soilQuality"
